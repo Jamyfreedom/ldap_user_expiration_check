@@ -1,17 +1,14 @@
-#Passionate in script and programming
-#Enquiry feel free contact "tankahhong520@gmail.com"
-
 
 date_now=$(date "+%Y%m%d%H%MZ")
 
 echo $date_now
 
 
-echo "This is checking LDAP active user password expiration script, source path : /home/t6839299/times2.sh" >> ldap_exp_report.txt
+echo "This is checking LDAP active user password expiration script, source path : /home/user/ldap_expiration_check.sh" >> ldap_exp_report.txt
 
 
 
-check_user_info=$(ldapsearch -x -b 'ou=people,dc=it,dc=tpgtelecom,dc=com,dc=sg' uid=* \* + | grep -E "bash|pwdChangedTime|uid:|gecos" |  sed '/^gecos/i \-\-\-\-\-\-\-\-\-\-\-\-' > ldap_user_info.txt)
+check_user_info=$(ldapsearch -x -b 'ou=people,dc='your setting',dc='your setting',dc='your setting',dc='your setting'' uid=* \* + | grep -E "bash|pwdChangedTime|uid:|gecos" |  sed '/^gecos/i \-\-\-\-\-\-\-\-\-\-\-\-' > ldap_user_info.txt)
 
 
 
@@ -52,13 +49,12 @@ echo $ct >> ldap_check_time.txt
 echo "this is original time" $TIME
 echo "this is ct :" $ct
 
-#plus_months=$(date -d "$ct 83 day" "+%Y%m%d")
+
 
 plus_months=$(date -d "$ct 90 day" "+%s")
-#$plus_months
-#plus_months=\"${plus_months}\"
+
 echo "plus_months :" $plus_months
-#sed -i "s/${TIME}/${ct}/" ldap_user_info.txt
+
 echo "##"
 
 
@@ -66,14 +62,11 @@ echo "##"
 
 unchanged_current_date=$(echo -e date)
 current_date=$(date -d "$date" "+%s")
-#current_date=\"${current_date}\"
+
 echo "current_date : " $current_date
 
 
-#if [[ $plus_months > $current_date ]]; then
-#if [ $plus_months -ge $current_date ]; then
- #start_date=$($plus_months)
- #end_date=$($current_date)
+)
 day_left=$(((($plus_months - $current_date))/86400))
 echo $day_left ": left days"
 
@@ -106,10 +99,6 @@ then
 
 
 else
-# #start_date=$(echo $plus_months)
-# #end_date=$(echo $current_date)
- #day_left=$( ($current_date - $plus_months) / 86400 )
- #echo $day_left ": left days"
 
   echo "Still healthy and valid, It is not whithin than 0-7 and below -7 to 01 or below -7 "
   echo "---------------------------"
@@ -119,7 +108,7 @@ fi
 #cut command to replace
 
 
-#echo $plus_months >> ldap_exp_result.txt
+t
 
 
 
@@ -128,14 +117,13 @@ done
 cat ldap_exp_report.txt | grep bash -B 4 -A 4 > report_tmpfile && mv -f report_tmpfile ldap_exp_report.txt
 sed -i '1i This is checking LDAP active user password expiration script, source path : /home/t6839299/times2.sh' ldap_exp_report.txt
 
-#mail -s "ldap_expiration_daily_report" administrator@simba.sg < ldap_exp_report.txt
 
-#mail -s "ldap_expiration_daily_report" jiale.sim@simba.sg< ldap_exp_report.txt
 
-mail -s "ldap_expiration_daily_report" jiale.sim@simba.sg gang.guo@simba.sg< ldap_exp_report.txt
+
+mail -s "ldap_expiration_daily_report" youremail@gmail.com youremail2@gmail.com< ldap_exp_report.txt
 
 
 sleep 5
 
-rm -rf /home/t6839299/ldap*
+rm -rf /home/user/ldap*
 
