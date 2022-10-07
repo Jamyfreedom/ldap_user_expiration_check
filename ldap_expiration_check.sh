@@ -115,7 +115,7 @@ t
 done
 
 cat ldap_exp_report.txt | grep bash -B 4 -A 4 > report_tmpfile && mv -f report_tmpfile ldap_exp_report.txt
-sed -i '1i This is checking LDAP active user password expiration script, source path : /home/t6839299/times2.sh' ldap_exp_report.txt
+sed -i '1i This is checking LDAP active user password expiration script, source path : /home/user/ldap_expiration_check.sh' ldap_exp_report.txt
 
 
 
